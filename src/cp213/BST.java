@@ -61,13 +61,11 @@ public class BST<T extends Comparable<T>> {
 	 * @return true if this BST is empty, false otherwise.
 	 */
 	public boolean empty() {
-
 		if (root.getHeight() == 0) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
@@ -76,11 +74,8 @@ public class BST<T extends Comparable<T>> {
 	 * @return height of root node, 0 if the root node is null.
 	 */
 	public int getHeight() {
-
 		int high = root.getHeight();
-
 		return high;
-
 	}
 
 	/**
@@ -127,17 +122,27 @@ public class BST<T extends Comparable<T>> {
 	 *            Data to store.
 	 */
 	public void insert(final T data) {
-		if (data.compareTo(this.root.getData()) < 0) {
+		if (data.compareTo(this.root.getData()) > 0) {
+			insert_aux(data, this.root.getLeft());
+		} else if (data.compareTo(this.root.getData()) < 0) {
 			insert_aux(data, this.root.getLeft());
 		}
-		if (data.compareTo(this.root.getData()) < 0) {
-			insert_aux(data, this.root.getLeft());
-		}
-
 	}
 
 	public void insert_aux(final T data, TreeNode<T> node) {
-
+		if(data.compareTo(node.getDat()) > 0){
+			if(node.getLeft() == null) {
+				node.setLeft(new TreeNode(data));
+			} else {
+			insert_aux(data,node.getLeft());	
+			}
+		} else if(data.compareTo(node.getData()) < 0) {
+			if(node.getRight() == null) {
+				node.setRight(new TreeNode(data));
+			} else {
+			insert_aux(data,node.getRight());	
+			}
+		}
 	}
 
 	/**
@@ -150,7 +155,6 @@ public class BST<T extends Comparable<T>> {
 	 */
 	public DataCountPair<T> retrieve(final T key) {
 		DataCountPair<T> ret = null;
-
 		return ret;
 	}
 
@@ -168,7 +172,6 @@ public class BST<T extends Comparable<T>> {
 	@SuppressWarnings("unchecked")
 	public final DataCountPair<T>[] toArray() {
 		DataCountPair<T>[] array = null;
-
 		if (this.root != null) {
 			// Create an array of tree nodes based upon the class of an empty
 			// DataCountPair object.
@@ -203,9 +206,7 @@ public class BST<T extends Comparable<T>> {
 	 * @return true if this BST is a valid BST, false otherwise.
 	 */
 	public boolean valid() {
-
 		boolean valid = true;
-
 		if (root.getLeft().getData().compareTo(root.getData()) > 0 && root.getHeight() <= root.getLeft().getHeight()
 				&& root.getHeight() <= root.getRight().getHeight()) {
 			valid = false;
@@ -220,7 +221,6 @@ public class BST<T extends Comparable<T>> {
 			}
 		}
 		return valid;
-
 	}
 
 	public boolean valid_aux(TreeNode<T> node) {
@@ -237,7 +237,6 @@ public class BST<T extends Comparable<T>> {
 				bool = valid_aux(node.getRight());
 			}
 		}
-
 		return bool;
 	}
 
