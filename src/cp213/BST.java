@@ -14,6 +14,8 @@ import java.util.Queue;
  */
 public class BST<T extends Comparable<T>> {
 
+	// Ben was here
+
 	// Attributes.
 	protected TreeNode<T> root = null;
 	protected int size = 0;
