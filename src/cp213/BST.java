@@ -13,8 +13,8 @@ import java.util.Queue;
  *            The data to store in the tree.
  */
 public class BST<T extends Comparable<T>> {
-
 	// Attributes.
+	// comment add
 	protected TreeNode<T> root = null;
 	protected int size = 0;
 
