@@ -130,17 +130,17 @@ public class BST<T extends Comparable<T>> {
 	}
 
 	public void insert_aux(final T data, TreeNode<T> node) {
-		if(data.compareTo(node.getDat()) > 0){
-			if(node.getLeft() == null) {
+		if (data.compareTo(node.getData()) > 0) {
+			if (node.getLeft() == null) {
 				node.setLeft(new TreeNode(data));
 			} else {
-			insert_aux(data,node.getLeft());	
+				insert_aux(data, node.getLeft());
 			}
-		} else if(data.compareTo(node.getData()) < 0) {
-			if(node.getRight() == null) {
+		} else if (data.compareTo(node.getData()) < 0) {
+			if (node.getRight() == null) {
 				node.setRight(new TreeNode(data));
 			} else {
-			insert_aux(data,node.getRight());	
+				insert_aux(data, node.getRight());
 			}
 		}
 	}
@@ -207,11 +207,11 @@ public class BST<T extends Comparable<T>> {
 	 */
 	public boolean valid() {
 		boolean valid = true;
-		if (root.getLeft().getData().compareTo(root.getData()) > 0 && root.getHeight() <= root.getLeft().getHeight()
+		if (root.getLeft().getData().compareTo(root.getData()) < 0 && root.getHeight() <= root.getLeft().getHeight()
 				&& root.getHeight() <= root.getRight().getHeight()) {
 			valid = false;
 
-		} else if (root.getRight().getData().compareTo(root.getData()) < 0
+		} else if (root.getRight().getData().compareTo(root.getData()) > 0
 				&& root.getHeight() <= root.getLeft().getHeight() && root.getHeight() <= root.getRight().getHeight()) {
 			valid = false;
 		} else {
@@ -225,9 +225,9 @@ public class BST<T extends Comparable<T>> {
 
 	public boolean valid_aux(TreeNode<T> node) {
 		boolean bool = true;
-		if (node.getLeft().getData().compareTo(node.getData()) > 0) {
+		if (node.getLeft().getData().compareTo(node.getData()) < 0) {
 			bool = false;
-		} else if (node.getRight().getData().compareTo(node.getData()) < 0) {
+		} else if (node.getRight().getData().compareTo(node.getData()) > 0) {
 			bool = false;
 		} else {
 			if (node.getLeft() != null) {
