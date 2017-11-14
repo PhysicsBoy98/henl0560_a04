@@ -50,7 +50,6 @@ public class Queue<T> extends SingleLink<T> {
 	 */
 	public void insert(final T data) {
 		final Node<T> node = new Node<>(data, null);
-
 		if (this.head == null) {
 			this.head = node;
 		} else {
@@ -110,7 +109,6 @@ public class Queue<T> extends SingleLink<T> {
 	 *
 	 * @param that
 	 */
-	// comment
 	private void moveFront(final Queue<T> that) {
 		// Extract the first node of that Queue.
 		final Node<T> node = that.head;
