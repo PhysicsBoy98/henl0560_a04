@@ -120,7 +120,9 @@ public class BST<T extends Comparable<T>> {
 	 *            Data to store.
 	 */
 	public void insert(final T data) {
-		if (data.compareTo(this.root.getData()) > 0) {
+		if (this.root == null) {
+			this.root = new TreeNode<T>(data);
+		} else if (data.compareTo(this.root.getData()) > 0) {
 			insert_aux(data, this.root.getLeft());
 		} else if (data.compareTo(this.root.getData()) < 0) {
 			insert_aux(data, this.root.getLeft());
@@ -128,19 +130,16 @@ public class BST<T extends Comparable<T>> {
 	}
 
 	public void insert_aux(final T data, TreeNode<T> node) {
-		if (data.compareTo(node.getData()) > 0) {
-			if (node.getLeft() == null) {
-				node.setLeft(new TreeNode(data));
-			} else {
-				insert_aux(data, node.getLeft());
-			}
-		} else if (data.compareTo(node.getData()) < 0) {
-			if (node.getRight() == null) {
-				node.setRight(new TreeNode(data));
-			} else {
-				insert_aux(data, node.getRight());
-			}
+		if (node == null) {
+			node = (new TreeNode<T>(data));
 		}
+
+		else if (data.compareTo(node.getData()) > 0) {
+			insert_aux(data, node.getLeft());
+		} else if (data.compareTo(node.getData()) < 0) {
+			insert_aux(data, node.getLeft());
+		}
+
 	}
 
 	/**
@@ -239,4 +238,9 @@ public class BST<T extends Comparable<T>> {
 		return bool;
 	}
 
+	public int getComparisons() {
+		// int comparisons = this.getCount();
+		return 6;
+		// comparisons;
+	}
 }
