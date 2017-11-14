@@ -1,7 +1,6 @@
 package cp213;
 
 import java.lang.reflect.Array;
-import java.util.Queue;
 
 /**
  * Implements a Binary Search Tree.
