@@ -13,7 +13,6 @@ package cp213;
  *            the Queue data type.
  */
 public class Queue<T> extends SingleLink<T> {
-
 	// Pointer to the rear of the queue.
 	private Node<T> rear = null;
 
