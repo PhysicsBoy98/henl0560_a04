@@ -9,6 +9,10 @@ public class Main {
 		System.out.println("Testing Insert");
 		BST<Integer> bst = new BST<Integer>();
 		bst.insert(9);
+		boolean bool = bst.contains(9);
+		System.out.println(bool);
+		bool = bst.valid();
+		System.out.println(bool);
 		bst.insert(8);
 		bst.insert(7);
 
