@@ -19,7 +19,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 	public void rightLeftRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
 		TreeNode<T> pivot = leftRotation(root);
-		parent.setLeft(pivot);
+		parent.setRight(pivot);
 	}
 
 	public void leftRightRotation(TreeNode<T> parent) {
@@ -31,7 +31,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 	public void rightRightRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
 		TreeNode<T> pivot = rightRotation(root);
-		parent.setLeft(pivot);
+		parent.setRight(pivot);
 	}
 
 	public TreeNode<T> leftRotation(TreeNode<T> root) {
@@ -53,10 +53,11 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		if (this.root == null) {
 			this.root = new TreeNode<T>(data);
 			this.size++;
-		} else {
+		} else if (this.contains(data) == false) {
 			insert_aux(data, root);
+		} else {
+			checkTree();
 		}
-		checkTree();
 	}
 
 	@Override
@@ -76,8 +77,6 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 				parent.setRight(new TreeNode<T>(data));
 				this.size++;
 			}
-		} else {
-			parent.incrementCount();
 		}
 		parent.updateHeight();
 	}
@@ -87,12 +86,14 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 			if (this.root.getCount() < this.root.getLeft().getCount()) {
 				TreeNode<T> pivot = leftRotation(this.root);
 				this.root = pivot;
+				root.updateHeight();
 			}
 		}
 		if (this.root.getRight() != null) {
 			if (this.root.getCount() < this.root.getRight().getCount()) {
 				TreeNode<T> pivot = rightRotation(this.root);
 				this.root = pivot;
+				root.updateHeight();
 			}
 		}
 		checkTree_aux(root);
@@ -120,5 +121,40 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 			}
 		}
 		parent.updateHeight();
+	}
+
+	@Override
+	public boolean contains(final T key) {
+		boolean contains = false;
+		if (root.getData().equals(key)) {
+			contains = true;
+		} else {
+			if (root.getLeft() != null) {
+				contains = this.containsAux(root.getLeft(), key);
+			}
+			if (contains == false && root.getRight() != null) {
+				contains = this.containsAux(root.getRight(), key);
+			}
+		}
+		return contains;
+	}
+
+	@Override
+	protected boolean containsAux(final TreeNode<T> n, final T key) {
+		boolean contains = false;
+		if (n.getData().equals(key)) {
+			n.incrementCount();
+			return true;
+		} else if (n.getLeft() == null && n.getRight() == null) {
+			return false;
+		} else {
+			if (n.getLeft() != null) {
+				contains = this.containsAux(n.getLeft(), key);
+			}
+			if (n.getRight() != null && contains == false) {
+				contains = this.containsAux(n.getRight(), key);
+			}
+		}
+		return contains;
 	}
 }
