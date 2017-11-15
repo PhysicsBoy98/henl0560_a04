@@ -12,50 +12,40 @@ package cp213;
 public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 	public void leftLeftRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = root.getLeft();
-		root.setLeft(pivot.getRight());
-		pivot.setRight(root);
+		TreeNode<T> pivot = leftRotation(root);
 		parent.setLeft(pivot);
 	}
 
 	public void rightLeftRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = root.getLeft();
-		root.setLeft(pivot.getRight());
-		pivot.setRight(root);
-		parent.setRight(pivot);
+		TreeNode<T> pivot = leftRotation(root);
+		parent.setLeft(pivot);
 	}
 
 	public void leftRightRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = root.getRight();
-		root.setRight(pivot.getLeft());
-		pivot.setLeft(root);
+		TreeNode<T> pivot = rightRotation(root);
 		parent.setLeft(pivot);
 	}
 
 	public void rightRightRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = root.getRight();
-		root.setRight(pivot.getLeft());
-		pivot.setLeft(root);
-		parent.setRight(pivot);
+		TreeNode<T> pivot = rightRotation(root);
+		parent.setLeft(pivot);
 	}
 
-	public void leftRotation() {
-		TreeNode<T> root = this.root;
+	public TreeNode<T> leftRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getLeft();
 		root.setLeft(pivot.getRight());
 		pivot.setRight(root);
-		this.root = pivot;
+		return pivot;
 	}
 
-	public void rightRotation() {
-		TreeNode<T> root = this.root;
+	public TreeNode<T> rightRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getRight();
 		root.setRight(pivot.getLeft());
 		pivot.setLeft(root);
-		this.root = pivot;
+		return pivot;
 	}
 
 	@Override
@@ -66,10 +56,11 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		} else {
 			insert_aux(data, root);
 		}
+		checkTree();
 	}
 
 	@Override
-	public void insert_aux(final T data, TreeNode<T> parent) {
+	protected void insert_aux(final T data, TreeNode<T> parent) {
 		int comp = parent.getData().compareTo(data);
 		if (comp > 0) {
 			if (parent.getLeft() != null) {
@@ -87,6 +78,46 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 			}
 		} else {
 			parent.incrementCount();
+		}
+		parent.updateHeight();
+	}
+
+	private void checkTree() {
+		if (this.root.getLeft() != null) {
+			if (this.root.getCount() < this.root.getLeft().getCount()) {
+				TreeNode<T> pivot = leftRotation(this.root);
+				this.root = pivot;
+			}
+		}
+		if (this.root.getRight() != null) {
+			if (this.root.getCount() < this.root.getRight().getCount()) {
+				TreeNode<T> pivot = rightRotation(this.root);
+				this.root = pivot;
+			}
+		}
+		checkTree_aux(root);
+	}
+
+	private void checkTree_aux(TreeNode<T> parent) {
+		TreeNode<T> left = parent.getLeft();
+		TreeNode<T> right = parent.getRight();
+		if (left != null) {
+			if (left.getLeft() != null && left.getCount() < left.getLeft().getCount()) {
+				leftLeftRotation(parent);
+			} else if (left.getRight() != null && left.getCount() < left.getRight().getCount()) {
+				leftRightRotation(parent);
+			} else {
+				checkTree_aux(left);
+			}
+		}
+		if (right != null) {
+			if (right.getLeft() != null && right.getCount() < right.getLeft().getCount()) {
+				rightLeftRotation(parent);
+			} else if (right.getRight() != null && right.getCount() < right.getRight().getCount()) {
+				rightRightRotation(parent);
+			} else {
+				checkTree_aux(right);
+			}
 		}
 		parent.updateHeight();
 	}

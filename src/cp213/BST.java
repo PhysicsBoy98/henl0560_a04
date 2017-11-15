@@ -28,15 +28,17 @@ public class BST<T extends Comparable<T>> {
 		if (root.getData().equals(key)) {
 			contains = true;
 		} else {
-			contains = this.containsAux(root.getLeft(), key);
-			if (contains == false) {
+			if (root.getLeft() != null) {
+				contains = this.containsAux(root.getLeft(), key);
+			}
+			if (contains == false && root.getRight() != null) {
 				contains = this.containsAux(root.getRight(), key);
 			}
 		}
 		return contains;
 	}
 
-	public boolean containsAux(final TreeNode<T> n, final T key) {
+	protected boolean containsAux(final TreeNode<T> n, final T key) {
 		boolean contains = false;
 		if (n.getData().equals(key)) {
 			return true;
@@ -128,7 +130,7 @@ public class BST<T extends Comparable<T>> {
 		}
 	}
 
-	public void insert_aux(final T data, TreeNode<T> parent) {
+	protected void insert_aux(final T data, TreeNode<T> parent) {
 		int comp = parent.getData().compareTo(data);
 		if (comp > 0) {
 			if (parent.getLeft() != null) {
