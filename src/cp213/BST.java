@@ -28,15 +28,17 @@ public class BST<T extends Comparable<T>> {
 		if (root.getData().equals(key)) {
 			contains = true;
 		} else {
-			contains = this.containsAux(root.getLeft(), key);
-			if (contains == false) {
+			if (root.getLeft() != null) {
+				contains = this.containsAux(root.getLeft(), key);
+			}
+			if (contains == false && root.getRight() != null) {
 				contains = this.containsAux(root.getRight(), key);
 			}
 		}
 		return contains;
 	}
 
-	public boolean containsAux(final TreeNode<T> n, final T key) {
+	protected boolean containsAux(final TreeNode<T> n, final T key) {
 		boolean contains = false;
 		if (n.getData().equals(key)) {
 			return true;
@@ -128,7 +130,7 @@ public class BST<T extends Comparable<T>> {
 		}
 	}
 
-	public void insert_aux(final T data, TreeNode<T> parent) {
+	protected void insert_aux(final T data, TreeNode<T> parent) {
 		int comp = parent.getData().compareTo(data);
 		if (comp > 0) {
 			if (parent.getLeft() != null) {
@@ -250,4 +252,43 @@ public class BST<T extends Comparable<T>> {
 		return 6;
 		// comparisons;
 	}
+
+	public void leftLeftRotation(TreeNode<T> parent) {
+		TreeNode<T> root = parent.getLeft();
+		TreeNode<T> pivot = leftRotation(root);
+		parent.setLeft(pivot);
+	}
+
+	public void rightLeftRotation(TreeNode<T> parent) {
+		TreeNode<T> root = parent.getRight();
+		TreeNode<T> pivot = leftRotation(root);
+		parent.setRight(pivot);
+	}
+
+	public void leftRightRotation(TreeNode<T> parent) {
+		TreeNode<T> root = parent.getLeft();
+		TreeNode<T> pivot = rightRotation(root);
+		parent.setLeft(pivot);
+	}
+
+	public void rightRightRotation(TreeNode<T> parent) {
+		TreeNode<T> root = parent.getRight();
+		TreeNode<T> pivot = rightRotation(root);
+		parent.setRight(pivot);
+	}
+
+	public TreeNode<T> leftRotation(TreeNode<T> root) {
+		TreeNode<T> pivot = root.getLeft();
+		root.setLeft(pivot.getRight());
+		pivot.setRight(root);
+		return pivot;
+	}
+
+	public TreeNode<T> rightRotation(TreeNode<T> root) {
+		TreeNode<T> pivot = root.getRight();
+		root.setRight(pivot.getLeft());
+		pivot.setLeft(root);
+		return pivot;
+	}
+
 }
