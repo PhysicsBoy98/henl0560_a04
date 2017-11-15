@@ -161,7 +161,18 @@ public class BST<T extends Comparable<T>> {
 	 *         its count, null otherwise.
 	 */
 	public DataCountPair<T> retrieve(final T key) {
-		// your code here
+		TreeNode<T> node = root;
+		DataCountPair<T> ret = null;
+		while (node != null && ret == null) {
+			if (key.compareTo(node.getData()) < 0) {
+				node = node.getLeft();
+			} else if (key.compareTo(node.getData()) > 0) {
+				node = node.getRight();
+			} else if (key.compareTo(node.getData()) == 0) {
+				ret = new DataCountPair(node.getData(), node.getCount());
+			}
+
+		}
 		return ret;
 	}
 
