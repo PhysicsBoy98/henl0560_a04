@@ -23,6 +23,13 @@ public class Main {
 
 		DrawTree<Integer> draw2 = new DrawTree<Integer>(bst);
 
+		PopularityTree<String> pTree = new PopularityTree<String>();
+		pTree.insert("J");
+		pTree.insert("A");
+		pTree.insert("B");
+		pTree.insert("K");
+		pTree.insert("A");
+		DrawTree<String> d3 = new DrawTree<String>(pTree);
 	}
 
 }

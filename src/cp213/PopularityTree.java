@@ -57,4 +57,37 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		pivot.setLeft(root);
 		this.root = pivot;
 	}
+
+	@Override
+	public void insert(final T data) {
+		if (this.root == null) {
+			this.root = new TreeNode<T>(data);
+			this.size++;
+		} else {
+			insert_aux(data, root);
+		}
+	}
+
+	@Override
+	public void insert_aux(final T data, TreeNode<T> parent) {
+		int comp = parent.getData().compareTo(data);
+		if (comp > 0) {
+			if (parent.getLeft() != null) {
+				insert_aux(data, parent.getLeft());
+			} else {
+				parent.setLeft(new TreeNode<T>(data));
+				this.size++;
+			}
+		} else if (comp < 0) {
+			if (parent.getRight() != null) {
+				insert_aux(data, parent.getRight());
+			} else {
+				parent.setRight(new TreeNode<T>(data));
+				this.size++;
+			}
+		} else {
+			parent.incrementCount();
+		}
+		parent.updateHeight();
+	}
 }
