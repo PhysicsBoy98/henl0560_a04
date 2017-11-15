@@ -159,7 +159,7 @@ public class BST<T extends Comparable<T>> {
 	 *         its count, null otherwise.
 	 */
 	public DataCountPair<T> retrieve(final T key) {
-		DataCountPair<T> ret = null;
+		// your code here
 		return ret;
 	}
 
