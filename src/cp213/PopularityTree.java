@@ -43,6 +43,41 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		parent.updateHeight();
 	}
 
+	@Override
+	public boolean contains(final T key) {
+		boolean contains = false;
+		if (root.getData().equals(key)) {
+			contains = true;
+		} else {
+			if (root.getLeft() != null) {
+				contains = this.containsAux(root.getLeft(), key);
+			}
+			if (contains == false && root.getRight() != null) {
+				contains = this.containsAux(root.getRight(), key);
+			}
+		}
+		return contains;
+	}
+
+	@Override
+	protected boolean containsAux(final TreeNode<T> n, final T key) {
+		boolean contains = false;
+		if (n.getData().equals(key)) {
+			n.incrementCount();
+			return true;
+		} else if (n.getLeft() == null && n.getRight() == null) {
+			return false;
+		} else {
+			if (n.getLeft() != null) {
+				contains = this.containsAux(n.getLeft(), key);
+			}
+			if (n.getRight() != null && contains == false) {
+				contains = this.containsAux(n.getRight(), key);
+			}
+		}
+		return contains;
+	}
+
 	private void checkTree() {
 		if (this.root.getLeft() != null) {
 			if (this.root.getCount() < this.root.getLeft().getCount()) {
@@ -83,40 +118,5 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 			}
 		}
 		parent.updateHeight();
-	}
-
-	@Override
-	public boolean contains(final T key) {
-		boolean contains = false;
-		if (root.getData().equals(key)) {
-			contains = true;
-		} else {
-			if (root.getLeft() != null) {
-				contains = this.containsAux(root.getLeft(), key);
-			}
-			if (contains == false && root.getRight() != null) {
-				contains = this.containsAux(root.getRight(), key);
-			}
-		}
-		return contains;
-	}
-
-	@Override
-	protected boolean containsAux(final TreeNode<T> n, final T key) {
-		boolean contains = false;
-		if (n.getData().equals(key)) {
-			n.incrementCount();
-			return true;
-		} else if (n.getLeft() == null && n.getRight() == null) {
-			return false;
-		} else {
-			if (n.getLeft() != null) {
-				contains = this.containsAux(n.getLeft(), key);
-			}
-			if (n.getRight() != null && contains == false) {
-				contains = this.containsAux(n.getRight(), key);
-			}
-		}
-		return contains;
 	}
 }

@@ -290,4 +290,5 @@ public class BST<T extends Comparable<T>> {
 		pivot.setLeft(root);
 		return pivot;
 	}
+
 }
