@@ -12,7 +12,7 @@ public class Main {
 		// DrawTree<Integer> draw = new DrawTree<Integer>(bst);
 		boolean bool = bst.contains(9);
 		System.out.println(bool);
-		// bool = bst.valid();
+		bool = bst.valid();
 		System.out.println(bool);
 		bst.insert(8);
 		bst.insert(10);
