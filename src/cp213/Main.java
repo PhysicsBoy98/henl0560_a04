@@ -14,7 +14,9 @@ public class Main {
 		bool = bst.valid();
 		System.out.println(bool);
 		bst.insert(8);
-		bst.insert(7);
+		bst.insert(10);
+		bst.insert(1);
+		bst.insert(9);
 
 		DrawTree<Integer> draw = new DrawTree<Integer>(bst);
 
