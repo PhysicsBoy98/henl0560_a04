@@ -10,7 +10,9 @@ public class Main {
 		BST<Integer> bst = new BST<Integer>();
 		bst.insert(9);
 		bst.insert(8);
-		bst.insert(7);
+		bst.insert(10);
+		bst.insert(1);
+		bst.insert(9);
 
 		DrawTree<Integer> draw = new DrawTree<Integer>(bst);
 
