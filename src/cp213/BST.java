@@ -123,27 +123,22 @@ public class BST<T extends Comparable<T>> {
 		if (this.root == null) {
 			this.root = new TreeNode<T>(data);
 		} else if (data.compareTo(this.root.getData()) > 0) {
-			insert_aux(data, this.root.getLeft());
+			insert_aux(data, this.root.getRight()));
 		} else if (data.compareTo(this.root.getData()) < 0) {
-			insert_aux(data, this.root.getLeft());
+			insert_aux(data, this.root.getLeft()));
 		}
-
+		this.size +=1;
 	}
 
 	public TreeNode<T> insert_aux(final T data, TreeNode<T> node) {
 		if (node == null) {
 			node = (new TreeNode<T>(data));
-			this.size += 1;
-		}
-
-		else if (data.compareTo(node.getData()) > 0) {
+		} else if (data.compareTo(node.getData()) > 0) {
 			insert_aux(data, node.getLeft());
 		} else if (data.compareTo(node.getData()) < 0) {
 			insert_aux(data, node.getLeft());
 		}
-
 		return node;
-
 	}
 
 	/**
