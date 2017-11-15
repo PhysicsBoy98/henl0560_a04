@@ -212,39 +212,38 @@ public class BST<T extends Comparable<T>> {
 	 * @return true if this BST is a valid BST, false otherwise.
 	 */
 	public boolean valid() {
-		boolean valid = valid_aux(root);
+		boolean valid = true;
+		if (root.getLeft().getData().compareTo(root.getData()) < 0 && root.getHeight() <= root.getLeft().getHeight()
+				&& root.getHeight() <= root.getRight().getHeight()) {
+			valid = false;
+
+		} else if (root.getRight().getData().compareTo(root.getData()) > 0
+				&& root.getHeight() <= root.getLeft().getHeight() && root.getHeight() <= root.getRight().getHeight()) {
+			valid = false;
+		} else {
+			valid = valid_aux(root.getLeft());
+			if (valid == true) {
+				valid = valid_aux(root.getRight());
+			}
+		}
 		return valid;
 	}
 
 	public boolean valid_aux(TreeNode<T> node) {
-		boolean v_left = true;
-		boolean v_right = true;
-		boolean valid = true;
-		if (node != null) {
+		boolean bool = true;
+		if (node.getLeft().getData().compareTo(node.getData()) < 0) {
+			bool = false;
+		} else if (node.getRight().getData().compareTo(node.getData()) > 0) {
+			bool = false;
+		} else {
 			if (node.getLeft() != null) {
-				if (node.getLeft().getData().compareTo(node.getData()) < 0) {
-					v_left = valid_aux(node.getLeft());
-				} else {
-					v_left = false;
-				}
-			} else if (node.getRight() != null) {
-				if (node.getRight().getData().compareTo(node.getData()) > 0) {
-					v_right = valid_aux(node.getRight());
-				} else {
-					v_right = false;
-				}
-
+				bool = valid_aux(node.getLeft());
 			}
-			if (v_right == false) {
-				valid = false;
-			} else if (v_left == false) {
-				valid = false;
-			} else {
-				valid = true;
+			if (node.getRight() != null) {
+				bool = valid_aux(node.getRight());
 			}
-
 		}
-		return valid;
+		return bool;
 	}
 
 	public int getComparisons() {
