@@ -10,44 +10,6 @@ package cp213;
  *            The data to store in the tree.
  */
 public class PopularityTree<T extends Comparable<T>> extends BST<T> {
-	public void leftLeftRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = leftRotation(root);
-		parent.setLeft(pivot);
-	}
-
-	public void rightLeftRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = leftRotation(root);
-		parent.setRight(pivot);
-	}
-
-	public void leftRightRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = rightRotation(root);
-		parent.setLeft(pivot);
-	}
-
-	public void rightRightRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = rightRotation(root);
-		parent.setRight(pivot);
-	}
-
-	public TreeNode<T> leftRotation(TreeNode<T> root) {
-		TreeNode<T> pivot = root.getLeft();
-		root.setLeft(pivot.getRight());
-		pivot.setRight(root);
-		return pivot;
-	}
-
-	public TreeNode<T> rightRotation(TreeNode<T> root) {
-		TreeNode<T> pivot = root.getRight();
-		root.setRight(pivot.getLeft());
-		pivot.setLeft(root);
-		return pivot;
-	}
-
 	@Override
 	public void insert(final T data) {
 		if (this.root == null) {
