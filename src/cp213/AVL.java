@@ -18,6 +18,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 		} else {
 			insert_aux(data, root);
 		}
+		checkTree();
 	}
 
 	@Override
@@ -41,5 +42,20 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 			parent.incrementCount();
 		}
 		parent.updateHeight();
+	}
+
+	protected void checkTree() {
+		int leftH = 0;
+		int rightH = 0;
+		if (this.root.getLeft() != null) {
+			leftH = this.root.getLeft().getHeight();
+		}
+		if (this.root.getRight() != null) {
+			rightH = this.root.getRight().getHeight();
+		}
+		if (Math.abs(rightH - leftH) > 0) {
+
+		}
+
 	}
 }
