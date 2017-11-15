@@ -12,12 +12,12 @@ public class Main {
 		// DrawTree<Integer> draw = new DrawTree<Integer>(bst);
 		boolean bool = bst.contains(9);
 		System.out.println(bool);
-		bool = bst.valid();
-		System.out.println(bool);
 		bst.insert(8);
 		bst.insert(10);
 		bst.insert(1);
 		bst.insert(9);
+		bool = bst.valid();
+		System.out.println(bool);
 		bool = bst.contains(1);
 		System.out.println(bool);
 
@@ -29,7 +29,7 @@ public class Main {
 		pTree.insert("B");
 		pTree.insert("K");
 		pTree.insert("A");
-		DrawTree<String> d3 = new DrawTree<String>(pTree);
+		// DrawTree<String> d3 = new DrawTree<String>(pTree);
 	}
 
 }
