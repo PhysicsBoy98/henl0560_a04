@@ -10,7 +10,8 @@ package cp213;
  *            The data to store in the tree.
  */
 public class PopularityTree<T extends Comparable<T>> extends BST<T> {
-<<<<<<< HEAD
+
+	@Override
 	public void leftLeftRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getLeft();
 		TreeNode<T> pivot = root.getLeft();
@@ -19,6 +20,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		parent.setLeft(pivot);
 	}
 
+	@Override
 	public void rightLeftRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
 		TreeNode<T> pivot = root.getLeft();
@@ -27,6 +29,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		parent.setRight(pivot);
 	}
 
+	@Override
 	public void leftRightRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getLeft();
 		TreeNode<T> pivot = root.getRight();
@@ -35,6 +38,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		parent.setLeft(pivot);
 	}
 
+	@Override
 	public void rightRightRotation(TreeNode<T> parent) {
 		TreeNode<T> root = parent.getRight();
 		TreeNode<T> pivot = root.getRight();
@@ -67,7 +71,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 	// insert_aux(data, root);
 	// }
 	// }
-=======
+
 	@Override
 	public void insert(final T data) {
 		if (this.root == null) {
@@ -79,7 +83,6 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 			checkTree();
 		}
 	}
->>>>>>> 96817e6e9e9c6479c6103c99ded3fb27482180ae
 
 	@Override
 	protected void insert_aux(final T data, TreeNode<T> parent) {
