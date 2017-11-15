@@ -7,12 +7,12 @@ public class Main {
 		System.out.println("-----------Testing BST-------------");
 		System.out.println("-----------------------------------");
 		System.out.println("Testing Insert");
-		BST bst = new BST();
+		BST<Integer> bst = new BST<Integer>();
 		bst.insert(9);
 		bst.insert(8);
 		bst.insert(7);
 
-		DrawTree draw = new DrawTree(bst);
+		DrawTree<Integer> draw = new DrawTree<Integer>(bst);
 
 	}
 
