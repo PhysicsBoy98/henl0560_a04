@@ -263,30 +263,6 @@ public class BST<T extends Comparable<T>> {
 		return this.comparison;
 	}
 
-	public void leftLeftRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = leftRotation(root);
-		parent.setLeft(pivot);
-	}
-
-	public void rightLeftRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = leftRotation(root);
-		parent.setRight(pivot);
-	}
-
-	public void leftRightRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getLeft();
-		TreeNode<T> pivot = rightRotation(root);
-		parent.setLeft(pivot);
-	}
-
-	public void rightRightRotation(TreeNode<T> parent) {
-		TreeNode<T> root = parent.getRight();
-		TreeNode<T> pivot = rightRotation(root);
-		parent.setRight(pivot);
-	}
-
 	public TreeNode<T> leftRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getLeft();
 		root.setLeft(pivot.getRight());

@@ -45,6 +45,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 	}
 
 	private void checkTree() {
+		TreeNode<T> pivot;
 		int rootBN = balanceNumber(root);
 		if (Math.abs(rootBN) > 1) {
 			if (rootBN > 1) {
@@ -53,29 +54,33 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 					rootLeftBN = balanceNumber(root.getLeft());
 				}
 				if (rootLeftBN < 0) {
-					// look at bohr, avl, left right
-				} else {
-					TreeNode<T> pivot = leftRotation(this.root);
-					this.root = pivot;
-					root.updateHeight();
+					pivot = leftRotation(this.root.getLeft());
+					this.root.setLeft(pivot);
+					this.root.getLeft().updateHeight();
 				}
-			} else {
-				int rootRightBN = 0;
-				if (root.getRight() != null) {
-					rootRightBN = balanceNumber(root.getRight());
-				}
-				if (rootRightBN > 0) {
-					// look at bohr, avl, right left
-				} else {
-					TreeNode<T> pivot = rightRotation(this.root);
-					this.root = pivot;
-					root.updateHeight();
-				}
+				pivot = rightRotation(this.root);
+				this.root = pivot;
+				root.updateHeight();
 			}
 		} else {
-			checkTree_aux(root);
+			int rootRightBN = 0;
+			if (root.getRight() != null) {
+				rootRightBN = balanceNumber(root.getRight());
+			}
+			if (rootRightBN > 0) {
+				pivot = rightRotation(this.root.getRight());
+				this.root.setRight(pivot);
+				this.root.getLeft().updateHeight();
+			}
+			pivot = leftRotation(this.root);
+			this.root = pivot;
+			root.updateHeight();
 		}
 	}
+
+	}else
+
+	{checkTree_aux(root);}}
 
 	// fix checkTree, apply fixes to checkTree_aux after
 	private void checkTree_aux(TreeNode<T> parent) {

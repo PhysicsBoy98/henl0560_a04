@@ -101,18 +101,26 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		TreeNode<T> right = parent.getRight();
 		if (left != null) {
 			if (left.getLeft() != null && left.getCount() < left.getLeft().getCount()) {
-				leftLeftRotation(parent);
+				TreeNode<T> root = parent.getLeft();
+				TreeNode<T> pivot = leftRotation(root);
+				parent.setLeft(pivot);
 			} else if (left.getRight() != null && left.getCount() < left.getRight().getCount()) {
-				leftRightRotation(parent);
+				TreeNode<T> root = parent.getLeft();
+				TreeNode<T> pivot = rightRotation(root);
+				parent.setLeft(pivot);
 			} else {
 				checkTree_aux(left);
 			}
 		}
 		if (right != null) {
 			if (right.getLeft() != null && right.getCount() < right.getLeft().getCount()) {
-				rightLeftRotation(parent);
+				TreeNode<T> root = parent.getRight();
+				TreeNode<T> pivot = leftRotation(root);
+				parent.setRight(pivot);
 			} else if (right.getRight() != null && right.getCount() < right.getRight().getCount()) {
-				rightRightRotation(parent);
+				TreeNode<T> root = parent.getRight();
+				TreeNode<T> pivot = rightRotation(root);
+				parent.setRight(pivot);
 			} else {
 				checkTree_aux(right);
 			}
