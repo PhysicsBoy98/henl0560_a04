@@ -291,6 +291,7 @@ public class BST<T extends Comparable<T>> {
 	public TreeNode<T> leftRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getLeft();
 		root.setLeft(pivot.getRight());
+		root.updateHeight();
 		pivot.setRight(root);
 		return pivot;
 	}
@@ -298,6 +299,7 @@ public class BST<T extends Comparable<T>> {
 	public TreeNode<T> rightRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getRight();
 		root.setRight(pivot.getLeft());
+		root.updateHeight();
 		pivot.setLeft(root);
 		return pivot;
 	}
