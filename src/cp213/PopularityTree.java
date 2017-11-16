@@ -81,14 +81,14 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 	private void checkTree() {
 		if (this.root.getLeft() != null) {
 			if (this.root.getCount() < this.root.getLeft().getCount()) {
-				TreeNode<T> pivot = leftRotation(this.root);
+				TreeNode<T> pivot = rightRotation(this.root);
 				this.root = pivot;
 				root.updateHeight();
 			}
 		}
 		if (this.root.getRight() != null) {
 			if (this.root.getCount() < this.root.getRight().getCount()) {
-				TreeNode<T> pivot = rightRotation(this.root);
+				TreeNode<T> pivot = leftRotation(this.root);
 				this.root = pivot;
 				root.updateHeight();
 			}
@@ -102,11 +102,11 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		if (left != null) {
 			if (left.getLeft() != null && left.getCount() < left.getLeft().getCount()) {
 				TreeNode<T> root = parent.getLeft();
-				TreeNode<T> pivot = leftRotation(root);
+				TreeNode<T> pivot = rightRotation(root);
 				parent.setLeft(pivot);
 			} else if (left.getRight() != null && left.getCount() < left.getRight().getCount()) {
 				TreeNode<T> root = parent.getLeft();
-				TreeNode<T> pivot = rightRotation(root);
+				TreeNode<T> pivot = leftRotation(root);
 				parent.setLeft(pivot);
 			} else {
 				checkTree_aux(left);
@@ -115,11 +115,11 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		if (right != null) {
 			if (right.getLeft() != null && right.getCount() < right.getLeft().getCount()) {
 				TreeNode<T> root = parent.getRight();
-				TreeNode<T> pivot = leftRotation(root);
+				TreeNode<T> pivot = rightRotation(root);
 				parent.setRight(pivot);
 			} else if (right.getRight() != null && right.getCount() < right.getRight().getCount()) {
 				TreeNode<T> root = parent.getRight();
-				TreeNode<T> pivot = rightRotation(root);
+				TreeNode<T> pivot = leftRotation(root);
 				parent.setRight(pivot);
 			} else {
 				checkTree_aux(right);

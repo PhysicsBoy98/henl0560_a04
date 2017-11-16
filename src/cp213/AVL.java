@@ -46,75 +46,142 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 
 	private void checkTree() {
 		TreeNode<T> pivot;
-		int rootBN = balanceNumber(root);
-		if (Math.abs(rootBN) > 1) {
+		int rootBN = balanceNumber(this.root);
+		if (rootBN > 1) {
 			if (rootBN > 1) {
 				int rootLeftBN = 0;
-				if (root.getLeft() != null) {
-					rootLeftBN = balanceNumber(root.getLeft());
+				if (this.root.getLeft() != null) {
+					rootLeftBN = balanceNumber(this.root.getLeft());
 				}
 				if (rootLeftBN < 0) {
 					pivot = leftRotation(this.root.getLeft());
 					this.root.setLeft(pivot);
 					this.root.getLeft().updateHeight();
+					pivot = rightRotation(this.root);
+					this.root = pivot;
+					this.root.updateHeight();
+				} else if (rootLeftBN == 1) {
+					pivot = rightRotation(this.root);
+					this.root = pivot;
+					this.root.updateHeight();
+				} else {
+					checkTree_aux(this.root);
 				}
-				pivot = rightRotation(this.root);
-				this.root = pivot;
-				root.updateHeight();
 			}
-		} else {
+		} else if (rootBN < -1) {
 			int rootRightBN = 0;
-			if (root.getRight() != null) {
-				rootRightBN = balanceNumber(root.getRight());
+			if (this.root.getRight() != null) {
+				rootRightBN = balanceNumber(this.root.getRight());
 			}
 			if (rootRightBN > 0) {
 				pivot = rightRotation(this.root.getRight());
 				this.root.setRight(pivot);
 				this.root.getLeft().updateHeight();
+				pivot = leftRotation(this.root);
+				this.root = pivot;
+				this.root.updateHeight();
+			} else if (rootRightBN == -1) {
+				pivot = leftRotation(this.root);
+				this.root = pivot;
+				this.root.updateHeight();
+			} else {
+				checkTree_aux(this.root);
 			}
-			pivot = leftRotation(this.root);
-			this.root = pivot;
-			root.updateHeight();
+		} else {
+			checkTree_aux(this.root);
 		}
 	}
 
-	}else
-
-	{checkTree_aux(root);}}
-
 	// fix checkTree, apply fixes to checkTree_aux after
 	private void checkTree_aux(TreeNode<T> parent) {
-		int leftBN = balanceNumber(parent.getLeft());
-		int rightBN = balanceNumber(parent.getRight());
+		TreeNode<T> pivot;
 		if (parent.getLeft() != null) {
-			if (parent.getLeft().getLeft() != null) {
-				leftH = parent.getLeft().getLeft().getHeight();
-			}
-			if (parent.getLeft().getRight() != null) {
-				rightH = parent.getLeft().getRight().getHeight();
-			}
-			if (Math.abs(rightH - leftH) > 1) {
-				if (leftH > rightH) {
-					leftLeftRotation(parent);
+			int parentLeftBN = balanceNumber(parent.getLeft());
+			if (parentLeftBN > 1) {
+				if (parentLeftBN > 1) {
+					int leftLeftBN = 0;
+					if (parent.getLeft().getLeft() != null) {
+						leftLeftBN = balanceNumber(parent.getLeft().getLeft());
+					}
+					if (leftLeftBN < 0) {
+						pivot = leftRotation(parent.getLeft().getLeft());
+						parent.getLeft().setLeft(pivot);
+						parent.getLeft().getLeft().updateHeight();
+						pivot = rightRotation(parent.getLeft());
+						parent.setLeft(pivot);
+						parent.getLeft().updateHeight();
+					} else if (leftLeftBN == 1) {
+						pivot = rightRotation(parent.getLeft());
+						parent.setLeft(pivot);
+						parent.getLeft().updateHeight();
+					} else {
+						checkTree_aux(parent.getLeft());
+					}
+				}
+			} else if (parentLeftBN < -1) {
+				int leftRightBN = 0;
+				if (parent.getLeft().getRight() != null) {
+					leftRightBN = balanceNumber(parent.getLeft().getRight());
+				}
+				if (leftRightBN > 0) {
+					pivot = rightRotation(parent.getLeft().getRight());
+					parent.getLeft().setRight(pivot);
+					parent.getLeft().getRight().updateHeight();
+					pivot = leftRotation(parent.getLeft());
+					parent.setLeft(pivot);
+					parent.getLeft().updateHeight();
+				} else if (leftRightBN == -1) {
+					pivot = leftRotation(parent.getLeft());
+					parent.setLeft(pivot);
+					parent.getLeft().updateHeight();
 				} else {
-					leftRightRotation(parent);
+					checkTree_aux(parent.getLeft());
 				}
 			} else {
 				checkTree_aux(parent.getLeft());
 			}
 		}
 		if (parent.getRight() != null) {
-			if (parent.getRight().getLeft() != null) {
-				leftH = parent.getRight().getLeft().getHeight();
-			}
-			if (parent.getRight().getRight() != null) {
-				rightH = parent.getRight().getRight().getHeight();
-			}
-			if (Math.abs(rightH - leftH) > 1) {
-				if (leftH > rightH) {
-					rightLeftRotation(parent);
+			int parentRightBN = balanceNumber(parent.getRight());
+			if (parentRightBN > 1) {
+				if (parentRightBN > 1) {
+					int rightLeftBN = 0;
+					if (parent.getRight().getLeft() != null) {
+						rightLeftBN = balanceNumber(parent.getRight().getLeft());
+					}
+					if (rightLeftBN < 0) {
+						pivot = leftRotation(parent.getRight().getLeft());
+						parent.getRight().setLeft(pivot);
+						parent.getRight().getLeft().updateHeight();
+						pivot = rightRotation(parent.getRight());
+						parent.setRight(pivot);
+						parent.getRight().updateHeight();
+					} else if (rightLeftBN == 1) {
+						pivot = rightRotation(parent.getRight());
+						parent.setRight(pivot);
+						parent.getRight().updateHeight();
+					} else {
+						checkTree_aux(parent.getRight());
+					}
+				}
+			} else if (parentRightBN < -1) {
+				int rightRightBN = 0;
+				if (parent.getRight().getRight() != null) {
+					rightRightBN = balanceNumber(parent.getRight().getRight());
+				}
+				if (rightRightBN > 0) {
+					pivot = rightRotation(parent.getRight().getRight());
+					parent.getRight().setRight(pivot);
+					parent.getRight().getLeft().updateHeight();
+					pivot = leftRotation(parent.getRight());
+					parent.setRight(pivot);
+					parent.getRight().updateHeight();
+				} else if (rightRightBN == -1) {
+					pivot = leftRotation(parent.getRight());
+					parent.setRight(pivot);
+					parent.getRight().updateHeight();
 				} else {
-					rightRightRotation(parent);
+					checkTree_aux(parent.getRight());
 				}
 			} else {
 				checkTree_aux(parent.getRight());

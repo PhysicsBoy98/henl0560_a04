@@ -15,7 +15,7 @@ public class BST<T extends Comparable<T>> {
 	// Attributes.
 	protected TreeNode<T> root = null;
 	protected int size = 0;
-	protected int comparison = 0;
+	private int comparisons = 0;
 
 	/**
 	 * Determines if this BST contains key.
@@ -170,9 +170,9 @@ public class BST<T extends Comparable<T>> {
 			} else if (key.compareTo(node.getData()) > 0) {
 				node = node.getRight();
 			} else if (key.compareTo(node.getData()) == 0) {
-				ret = new DataCountPair(node.getData(), node.getCount());
+				ret = new DataCountPair<T>(node.getData(), node.getCount());
 			}
-
+			comparisons++;
 		}
 		return ret;
 	}
@@ -259,11 +259,7 @@ public class BST<T extends Comparable<T>> {
 		return valid;
 	}
 
-	public int getComparisons() {
-		return this.comparison;
-	}
-
-	public TreeNode<T> leftRotation(TreeNode<T> root) {
+	public TreeNode<T> rightRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getLeft();
 		root.setLeft(pivot.getRight());
 		root.updateHeight();
@@ -271,12 +267,30 @@ public class BST<T extends Comparable<T>> {
 		return pivot;
 	}
 
-	public TreeNode<T> rightRotation(TreeNode<T> root) {
+	public TreeNode<T> leftRotation(TreeNode<T> root) {
 		TreeNode<T> pivot = root.getRight();
 		root.setRight(pivot.getLeft());
 		root.updateHeight();
 		pivot.setLeft(root);
 		return pivot;
+	}
+
+	/**
+	 * Get number of comparisons executed by the {@code retrieve} method.
+	 *
+	 * @return comparisons
+	 */
+	public int getComparisons() {
+		// your code here
+		return comparisons;
+	}
+
+	/**
+	 * Resets the comparison count to 0.
+	 */
+	public void resetComparisons() {
+		// your code here
+		comparisons = 0;
 	}
 
 }
