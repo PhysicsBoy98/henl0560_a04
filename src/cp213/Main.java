@@ -9,25 +9,29 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		System.out.println("Training file: decline.txt");
-		Scanner s = new Scanner(new File("src/cp213/decline.txt"));
+		File f = new File("src/cp213/decline.txt");
+		Scanner s = new Scanner(f);
 		s.useDelimiter("");
 		int total = 0;
 		while (s.hasNext()) {
 			total += 1;
 			s.next();
 		}
+		System.out.println(total);
 		System.out.println("Comparisons file: miserable.txt");
 		System.out.println("-------------------------------");
 		System.out.println("Character table for training file");
-		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		String alphabetL = "abcdefghijklmnopqrstuvwxyz";
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		System.out.println("Char    Count Percent");
+		s.close();
 		for (int i = 0; i < alphabet.length(); i++) {
 			int count = 0;
+			s = new Scanner(f);
 			while (s.hasNext()) {
-				if (s.next().charAt(0) == alphabet.charAt(i) || s.next().charAt(0) == alphabetL.charAt(i)) {
+				if (s.next().toLowerCase().charAt(0) == alphabet.charAt(i)) {
 					count += 1;
 				}
+				s.close();
 			}
 			double percent = count / total;
 			System.out.println("   " + alphabet.charAt(i) + "	" + count + "	" + percent);
