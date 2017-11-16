@@ -15,6 +15,7 @@ public class BST<T extends Comparable<T>> {
 	// Attributes.
 	protected TreeNode<T> root = null;
 	protected int size = 0;
+	protected int comparison = 0;
 
 	/**
 	 * Determines if this BST contains key.
@@ -259,9 +260,7 @@ public class BST<T extends Comparable<T>> {
 	}
 
 	public int getComparisons() {
-		// int comparisons = this.getCount();
-		return 6;
-		// comparisons;
+		return this.comparison;
 	}
 
 	public void leftLeftRotation(TreeNode<T> parent) {

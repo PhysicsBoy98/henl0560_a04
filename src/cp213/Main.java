@@ -1,10 +1,37 @@
 package cp213;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
+		System.out.println("Training file: decline.txt");
+		Scanner s = new Scanner(new File("src/cp213/decline.txt"));
+		s.useDelimiter("");
+		int total = 0;
+		while (s.hasNext()) {
+			total += 1;
+			s.next();
+		}
+		System.out.println("Comparisons file: miserable.txt");
+		System.out.println("-------------------------------");
+		System.out.println("Character table for training file");
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String alphabetL = "abcdefghijklmnopqrstuvwxyz";
+		System.out.println("Char    Count Percent");
+		for (int i = 0; i < alphabet.length(); i++) {
+			int count = 0;
+			while (s.hasNext()) {
+				if (s.next().charAt(0) == alphabet.charAt(i) || s.next().charAt(0) == alphabetL.charAt(i)) {
+					count += 1;
+				}
+			}
+			double percent = count / total;
+			System.out.println("   " + alphabet.charAt(i) + "	" + count + "	" + percent);
+		}
 		System.out.println("-----------------------------------");
 		System.out.println("-----------Testing BST-------------");
 		System.out.println("-----------------------------------");
