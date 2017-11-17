@@ -22,13 +22,34 @@ public class A04 {
 	 *             If error on files.
 	 */
 	public static void main(final String[] args) throws IOException {
-		AVL<String> avl = new AVL<String>();
-		String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		avl.insert("A");
-		for (int i = 1; i < alpha.length(); i++) {
-			avl.insert(alpha.substring(i - 1, i));
+		BST<Character> bst = new BST<Character>();
+		PopularityTree<Character> pTree = new PopularityTree<Character>();
+		AVL<Character> avl = new AVL<Character>();
+		final File decline = new File("decline.txt");
+		final File miserables = new File("miserables.txt");
+		final File otoos610 = new File("otoos610.txt");
+		File training;
+		File comparisons;
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				training = decline;
+				comparisons = miserables;
+			} else if (i == 1) {
+				training = miserables;
+				comparisons = otoos610;
+			} else {
+				training = otoos610;
+				comparisons = decline;
+			}
+			System.out.println("Traing File: " + training.getName());
+			System.out.println("Comparisons File: " + comparisons.getName());
+			System.out.println("------------------------------\r\n");
+			train(bst, training);
+			train(pTree, training);
+			train(avl, training);
+			characterTable(bst);
 		}
-		DrawTree<String> avlDraw = new DrawTree<String>(avl);
+
 	}
 
 	/**
@@ -38,7 +59,21 @@ public class A04 {
 	 *            The BST to generate the table from.
 	 */
 	public static void characterTable(final BST<Character> tree) {
-
+		final char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+		int total = 0;
+		int count = 0;
+		DataCountPair<Character> dcp;
+		System.out.println("Character Table for Training File\n");
+		System.out.println("Char\tCount\tPercent\n");
+		for (char c : alpha) {
+			dcp = tree.retrieve(c);
+			total += dcp.getCount();
+		}
+		for (char c : alpha) {
+			dcp = tree.retrieve(c);
+			count = dcp.getCount();
+			System.out.println(c + "\t" + count + "\t" + (count / total) * 100);
+		}
 	}
 
 	/**
@@ -73,8 +108,6 @@ public class A04 {
 	 *             Thrown if file not found.
 	 */
 	public static void train(final BST<Character> tree, final File file) throws FileNotFoundException {
-		// your code here
-
 		return;
 	}
 }
