@@ -3,6 +3,7 @@ package cp213;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Process text files with three kinds of trees to determine their relative
@@ -108,6 +109,15 @@ public class A04 {
 	 *             Thrown if file not found.
 	 */
 	public static void train(final BST<Character> tree, final File file) throws FileNotFoundException {
+		Scanner s = new Scanner(file);
+		String word = s.next().toUpperCase();
+		while (s.hasNext()) {
+			for (int i = 0; i < word.length(); i++) {
+				tree.insert(word.charAt(i));
+			}
+			word = s.next().toUpperCase();
+
+		}
 		return;
 	}
 }
