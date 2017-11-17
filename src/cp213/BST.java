@@ -112,11 +112,8 @@ public class BST<T extends Comparable<T>> {
 	 */
 
 	public boolean equals(final BST<T> that) {
-		if (this.equals(that)) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return bool;
 	}
 
 	/**

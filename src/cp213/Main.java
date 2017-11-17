@@ -13,6 +13,8 @@ public class Main {
 		BST<String> bst_s = new BST<String>();
 		BST<Integer> bst_i2 = new BST<Integer>();
 		BST<String> bst_s2 = new BST<String>();
+		BST<Integer> bst_i3 = new BST<Integer>();
+		BST<String> bst_s3 = new BST<String>();
 		boolean test_i = bst_i.empty();
 		boolean test_s = bst_s.empty();
 		System.out.println("Testing empty on empty bst");
@@ -55,6 +57,29 @@ public class Main {
 		boolean test_eq_s = bst_s.equals(bst_s2);
 		System.out.println("String bst: " + test_eq_s);
 		System.out.println("Integer bst: " + test_eq_i);
+		System.out.println();
+
+		System.out.println("Testing equals on equivalent trees");
+		bst_i3.insert(1);
+		bst_s3.insert("one");
+		test_eq_i = bst_i.equals(bst_i3);
+		test_eq_s = bst_s.equals(bst_s3);
+		System.out.println("String bst: " + test_eq_s);
+		System.out.println("Integer bst: " + test_eq_i);
+		System.out.println();
+
+		System.out.println("Testing retrieve on bst");
+		DataCountPair<Integer> ret_i = bst_i.retrieve(1);
+		DataCountPair<String> ret_s = bst_s.retrieve("one");
+		System.out.println("String bst: " + ret_s);
+		System.out.println("Integer bst: " + ret_i);
+		System.out.println();
+
+		System.out.println("Testing valid on valid bst");
+		test_s = bst_s.valid();
+		test_i = bst_i.valid();
+		System.out.println("String bst: " + test_s);
+		System.out.println("Integer bst: " + test_i);
 		System.out.println();
 
 	}
