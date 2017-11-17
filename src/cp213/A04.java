@@ -57,7 +57,7 @@ public class A04 {
 				System.out.println("Tree Type: " + tree.getClass());
 				System.out.println("Valid: " + tree.valid());
 				System.out.println("Height: " + tree.getHeight());
-				System.out.println("Retriving...");
+				System.out.println("Retrieving...");
 				System.out.println(retrieve(tree, comparisons));
 				tree.resetComparisons();
 			}
