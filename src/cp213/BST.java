@@ -112,10 +112,7 @@ public class BST<T extends Comparable<T>> {
 	 */
 
 	public boolean equals(final BST<T> that) {
-<<<<<<< HEAD
 
-		return bool;
-=======
 		boolean equals = true;
 		if (this.root.getData() != that.root.getData()) {
 			equals = false;
@@ -142,7 +139,6 @@ public class BST<T extends Comparable<T>> {
 			}
 		}
 		return equals;
->>>>>>> f5d7553e3e54a4ab6a63c71eaf0bc2c45edb7d6f
 	}
 
 	/**
