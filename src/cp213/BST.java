@@ -62,11 +62,14 @@ public class BST<T extends Comparable<T>> {
 	 * @return true if this BST is empty, false otherwise.
 	 */
 	public boolean empty() {
-		if (root.getHeight() == 0) {
-			return true;
+		boolean bool;
+		if (root == null) {
+			bool = true;
 		} else {
-			return false;
+			bool = false;
 		}
+		return bool;
+
 	}
 
 	/**
