@@ -117,6 +117,7 @@ public class Main {
 		AVL<Integer> avl_i = new AVL<Integer>();
 		AVL<String> avl_s = new AVL<String>();
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		System.out.println("Testing insert for AVL tree");
 		for (int j = 0; j < alphabet.length(); j++) {
 			avl_s.insert(Character.toString(alphabet.charAt(j)));
 		}
