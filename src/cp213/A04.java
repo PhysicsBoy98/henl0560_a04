@@ -22,7 +22,13 @@ public class A04 {
 	 *             If error on files.
 	 */
 	public static void main(final String[] args) throws IOException {
-
+		AVL<String> avl = new AVL<String>();
+		String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		avl.insert("A");
+		for (int i = 1; i < alpha.length(); i++) {
+			avl.insert(alpha.substring(i - 1, i));
+		}
+		DrawTree<String> avlDraw = new DrawTree<String>(avl);
 	}
 
 	/**

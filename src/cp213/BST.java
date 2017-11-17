@@ -109,11 +109,32 @@ public class BST<T extends Comparable<T>> {
 	 */
 
 	public boolean equals(final BST<T> that) {
-		if (this.equals(that)) {
-			return true;
+		boolean equals = true;
+		if (this.root.getData() != that.root.getData()) {
+			equals = false;
 		} else {
-			return false;
+			equals = equals_aux(this.root, that.getRoot());
 		}
+		return equals;
+	}
+
+	public boolean equals_aux(TreeNode<T> thisNode, TreeNode<T> thatNode) {
+		boolean equals = true;
+		if (thisNode.getLeft() != null && thatNode.getLeft() != null) {
+			if (thisNode.getLeft().getData() != thatNode.getLeft().getData()) {
+				equals = false;
+			} else {
+				equals = equals_aux(thisNode.getLeft(), thatNode.getLeft());
+			}
+		}
+		if (thisNode.getRight() != null && thatNode.getRight() != null) {
+			if (thisNode.getRight().getData() != thatNode.getRight().getData()) {
+				equals = false;
+			} else {
+				equals = equals_aux(thisNode.getRight(), thatNode.getRight());
+			}
+		}
+		return equals;
 	}
 
 	/**
@@ -164,15 +185,17 @@ public class BST<T extends Comparable<T>> {
 	public DataCountPair<T> retrieve(final T key) {
 		TreeNode<T> node = root;
 		DataCountPair<T> ret = null;
+		int compare = 0;
 		while (node != null && ret == null) {
-			if (key.compareTo(node.getData()) < 0) {
+			compare = key.compareTo(node.getData());
+			comparisons++;
+			if (compare < 0) {
 				node = node.getLeft();
-			} else if (key.compareTo(node.getData()) > 0) {
+			} else if (compare > 0) {
 				node = node.getRight();
-			} else if (key.compareTo(node.getData()) == 0) {
+			} else if (compare == 0) {
 				ret = new DataCountPair<T>(node.getData(), node.getCount());
 			}
-			comparisons++;
 		}
 		return ret;
 	}
@@ -281,16 +304,14 @@ public class BST<T extends Comparable<T>> {
 	 * @return comparisons
 	 */
 	public int getComparisons() {
-		// your code here
-		return comparisons;
+		return this.comparisons;
 	}
 
 	/**
 	 * Resets the comparison count to 0.
 	 */
 	public void resetComparisons() {
-		// your code here
-		comparisons = 0;
+		this.comparisons = 0;
 	}
 
 }

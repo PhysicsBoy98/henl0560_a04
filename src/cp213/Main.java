@@ -1,7 +1,6 @@
 package cp213;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -36,17 +35,11 @@ public class Main {
 		 * DrawTree<String> d6 = new DrawTree<String>(pTree);
 		 */
 		AVL<Integer> avl = new AVL<Integer>();
-		ArrayList<DrawTree<Integer>> windows = new ArrayList<DrawTree<Integer>>();
-		avl.insert(6);
-		windows.add(new DrawTree<Integer>(avl));
-		int[] numList = { 7, 8, 9, 11, 12, 15, 18 };
+		int[] numList = { 6, 7, 8, 9, 11, 12, 15, 18 };
 		for (int i : numList) {
-			if (i == 11) {
-				System.out.println(i);
-			}
 			avl.insert(i);
-			windows.add(new DrawTree<Integer>(avl));
 		}
+		DrawTree<Integer> d = new DrawTree<Integer>(avl);
 	}
 
 }
