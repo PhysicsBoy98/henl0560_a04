@@ -3,6 +3,7 @@ package cp213;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -23,32 +24,43 @@ public class A04 {
 	 *             If error on files.
 	 */
 	public static void main(final String[] args) throws IOException {
-		BST<Character> bst = new BST<Character>();
-		PopularityTree<Character> pTree = new PopularityTree<Character>();
-		AVL<Character> avl = new AVL<Character>();
+		final String dash = "------------------------------\r\n";
+		ArrayList<BST<Character>> trees = new ArrayList<BST<Character>>();
+		trees.add(new BST<Character>());
+		trees.add(new PopularityTree<Character>());
+		trees.add(new AVL<Character>());
 		final File decline = new File("src/cp213/decline.txt");
-		// final File miserables = new File("scr/cp213/miserables.txt");
-		// final File otoos610 = new File("scr/cp213/otoos610.txt");
+		final File miserables = new File("scr/cp213/miserables.txt");
+		final File otoos610 = new File("scr/cp213/otoos610.txt");
 		File training = decline;
 		File comparisons;
 		for (int i = 0; i < 3; i++) {
-			// if (i == 0) {
-			// training = decline;
-			// comparisons = miserables;
-			// } else if (i == 1) {
-			// training = miserables;
-			// comparisons = otoos610;
-			// } else {
-			// training = otoos610;
-			// comparisons = decline;
-			// }
+			if (i == 0) {
+				training = decline;
+				comparisons = miserables;
+			} else if (i == 1) {
+				training = miserables;
+				comparisons = otoos610;
+			} else {
+				training = otoos610;
+				comparisons = decline;
+			}
 			System.out.println("Traing File: " + training.getName());
-			// System.out.println("Comparisons File: " + comparisons.getName());
-			System.out.println("------------------------------\r\n");
-			train(bst, training);
-			train(pTree, training);
-			train(avl, training);
-			characterTable(bst);
+			System.out.println("Comparisons File: " + comparisons.getName());
+			System.out.println(dash);
+			for (BST<Character> tree : trees) {
+				train(tree, training);
+			}
+			characterTable(trees.get(2));
+			for (BST<Character> tree : trees) {
+				System.out.println(dash);
+				System.out.println("Tree Type: " + tree.getClass());
+				System.out.println("Valid: " + tree.valid());
+				System.out.println("Height: " + tree.getHeight());
+				System.out.println("Retriving...");
+				System.out.println(retrieve(tree, comparisons));
+				tree.resetComparisons();
+			}
 		}
 
 	}
@@ -76,6 +88,7 @@ public class A04 {
 			count = dcp.getCount();
 			output = String.format(c + "\t" + count + "\t" + "%.2f", ((double) (count / total) * 100));
 			System.out.println(output);
+			tree.resetComparisons();
 		}
 	}
 
@@ -94,8 +107,15 @@ public class A04 {
 	 *             Thrown if file not found.
 	 */
 	public static int retrieve(final BST<Character> tree, final File file) throws FileNotFoundException {
-		// your code here
-
+		Scanner s = new Scanner(file);
+		String word = s.next().toUpperCase();
+		while (s.hasNext()) {
+			for (int i = 0; i < word.length(); i++) {
+				tree.retrieve(word.charAt(i));
+			}
+			word = s.next().toUpperCase();
+		}
+		s.close();
 		return tree.getComparisons();
 	}
 
