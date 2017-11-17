@@ -18,6 +18,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		} else if (this.contains(data) == false) {
 			insert_aux(data, root);
 		} else {
+
 			checkTree();
 		}
 	}
@@ -48,6 +49,7 @@ public class PopularityTree<T extends Comparable<T>> extends BST<T> {
 		boolean contains = false;
 		if (root.getData().equals(key)) {
 			contains = true;
+			root.incrementCount();
 		} else {
 			if (root.getLeft() != null) {
 				contains = this.containsAux(root.getLeft(), key);

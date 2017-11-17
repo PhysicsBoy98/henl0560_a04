@@ -112,7 +112,6 @@ public class BST<T extends Comparable<T>> {
 	 */
 
 	public boolean equals(final BST<T> that) {
-
 		boolean equals = true;
 		if (this.root.getData() != that.root.getData()) {
 			equals = false;

@@ -56,7 +56,6 @@ public class A04 {
 	 *             Thrown if file not found.
 	 */
 	public static int retrieve(final BST<Character> tree, final File file) throws FileNotFoundException {
-
 		// your code here
 
 		return tree.getComparisons();
@@ -74,7 +73,6 @@ public class A04 {
 	 *             Thrown if file not found.
 	 */
 	public static void train(final BST<Character> tree, final File file) throws FileNotFoundException {
-
 		// your code here
 
 		return;
