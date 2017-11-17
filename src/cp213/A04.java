@@ -86,7 +86,7 @@ public class A04 {
 		for (char c : alpha) {
 			dcp = tree.retrieve(c);
 			count = dcp.getCount();
-			output = String.format(c + "\t" + count + "\t" + "%.2f", ((double) (count / total) * 100));
+			output = String.format(c + "\t" + count + "\t" + "%.2f", (count / total * 100));
 			System.out.println(output);
 			tree.resetComparisons();
 		}
