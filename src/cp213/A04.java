@@ -24,15 +24,17 @@ public class A04 {
 	 *             If error on files.
 	 */
 	public static void main(final String[] args) throws IOException {
-		final String dash = "------------------------------\r\n";
+		final String dash = "------------------------------";
+		int minInt = 2147483647;
+		String minName = null;
 		ArrayList<BST<Character>> trees = new ArrayList<BST<Character>>();
 		trees.add(new BST<Character>());
 		trees.add(new PopularityTree<Character>());
 		trees.add(new AVL<Character>());
-		final File decline = new File("src/cp213/decline.txt");
-		final File miserables = new File("scr/cp213/miserables.txt");
-		final File otoos610 = new File("scr/cp213/otoos610.txt");
-		File training = decline;
+		final File decline = new File("decline.txt");
+		final File miserables = new File("miserables.txt");
+		final File otoos610 = new File("otoos610.txt");
+		File training;
 		File comparisons;
 		for (int i = 0; i < 3; i++) {
 			if (i == 0) {
@@ -54,13 +56,17 @@ public class A04 {
 			characterTable(trees.get(2));
 			for (BST<Character> tree : trees) {
 				System.out.println(dash);
-				System.out.println("Tree Type: " + tree.getClass());
+				System.out.println("Tree Type: " + tree.getClass().getName());
 				System.out.println("Valid: " + tree.valid());
 				System.out.println("Height: " + tree.getHeight());
 				System.out.println("Retriving...");
-				System.out.println(retrieve(tree, comparisons));
+				int comp = retrieve(tree, comparisons);
+				minName = (comp < minInt) ? tree.getClass().getName() : minName;
+				System.out.println("Comparisons: " + comp);
 				tree.resetComparisons();
 			}
+			System.out.println(dash);
+			System.out.println("Tree with minimum comparisons: " + minName);
 		}
 
 	}
@@ -109,9 +115,13 @@ public class A04 {
 	public static int retrieve(final BST<Character> tree, final File file) throws FileNotFoundException {
 		Scanner s = new Scanner(file);
 		String word = s.next().toUpperCase();
+		char c;
 		while (s.hasNext()) {
 			for (int i = 0; i < word.length(); i++) {
-				tree.retrieve(word.charAt(i));
+				c = word.charAt(i);
+				if (Character.isLetter(c)) {
+					tree.retrieve(word.charAt(i));
+				}
 			}
 			word = s.next().toUpperCase();
 		}
@@ -133,9 +143,13 @@ public class A04 {
 	public static void train(final BST<Character> tree, final File file) throws FileNotFoundException {
 		Scanner s = new Scanner(file);
 		String word = s.next().toUpperCase();
+		char c;
 		while (s.hasNext()) {
 			for (int i = 0; i < word.length(); i++) {
-				tree.insert(word.charAt(i));
+				c = word.charAt(i);
+				if (Character.isLetter(c)) {
+					tree.insert(word.charAt(i));
+				}
 			}
 			word = s.next().toUpperCase();
 
