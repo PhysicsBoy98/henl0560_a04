@@ -284,7 +284,6 @@ public class BST<T extends Comparable<T>> {
 	 * @return comparisons
 	 */
 	public int getComparisons() {
-		// your code here
 		return comparisons;
 	}
 
@@ -292,7 +291,6 @@ public class BST<T extends Comparable<T>> {
 	 * Resets the comparison count to 0.
 	 */
 	public void resetComparisons() {
-		// your code here
 		comparisons = 0;
 	}
 
