@@ -76,7 +76,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 			if (rootRightBN > 0) {
 				pivot = rightRotation(this.root.getRight());
 				this.root.setRight(pivot);
-				this.root.getLeft().updateHeight();
+				this.root.getRight().updateHeight();
 				pivot = leftRotation(this.root);
 				this.root = pivot;
 				this.root.updateHeight();
@@ -172,7 +172,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 				if (rightRightBN > 0) {
 					pivot = rightRotation(parent.getRight().getRight());
 					parent.getRight().setRight(pivot);
-					parent.getRight().getLeft().updateHeight();
+					parent.getRight().getRight().updateHeight();
 					pivot = leftRotation(parent.getRight());
 					parent.setRight(pivot);
 					parent.getRight().updateHeight();

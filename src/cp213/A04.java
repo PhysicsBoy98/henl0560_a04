@@ -26,24 +26,24 @@ public class A04 {
 		BST<Character> bst = new BST<Character>();
 		PopularityTree<Character> pTree = new PopularityTree<Character>();
 		AVL<Character> avl = new AVL<Character>();
-		final File decline = new File("decline.txt");
-		final File miserables = new File("miserables.txt");
-		final File otoos610 = new File("otoos610.txt");
-		File training;
+		final File decline = new File("src/cp213/decline.txt");
+		// final File miserables = new File("scr/cp213/miserables.txt");
+		// final File otoos610 = new File("scr/cp213/otoos610.txt");
+		File training = decline;
 		File comparisons;
 		for (int i = 0; i < 3; i++) {
-			if (i == 0) {
-				training = decline;
-				comparisons = miserables;
-			} else if (i == 1) {
-				training = miserables;
-				comparisons = otoos610;
-			} else {
-				training = otoos610;
-				comparisons = decline;
-			}
+			// if (i == 0) {
+			// training = decline;
+			// comparisons = miserables;
+			// } else if (i == 1) {
+			// training = miserables;
+			// comparisons = otoos610;
+			// } else {
+			// training = otoos610;
+			// comparisons = decline;
+			// }
 			System.out.println("Traing File: " + training.getName());
-			System.out.println("Comparisons File: " + comparisons.getName());
+			// System.out.println("Comparisons File: " + comparisons.getName());
 			System.out.println("------------------------------\r\n");
 			train(bst, training);
 			train(pTree, training);
@@ -61,8 +61,9 @@ public class A04 {
 	 */
 	public static void characterTable(final BST<Character> tree) {
 		final char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-		int total = 0;
+		double total = 0;
 		int count = 0;
+		String output = null;
 		DataCountPair<Character> dcp;
 		System.out.println("Character Table for Training File\n");
 		System.out.println("Char\tCount\tPercent\n");
@@ -73,7 +74,8 @@ public class A04 {
 		for (char c : alpha) {
 			dcp = tree.retrieve(c);
 			count = dcp.getCount();
-			System.out.println(c + "\t" + count + "\t" + (count / total) * 100);
+			output = String.format(c + "\t" + count + "\t" + "%.2f", ((double) (count / total) * 100));
+			System.out.println(output);
 		}
 	}
 
@@ -118,6 +120,7 @@ public class A04 {
 			word = s.next().toUpperCase();
 
 		}
+		s.close();
 		return;
 	}
 }
