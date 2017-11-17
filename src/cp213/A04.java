@@ -56,17 +56,17 @@ public class A04 {
 			characterTable(trees.get(2));
 			for (BST<Character> tree : trees) {
 				System.out.println(dash);
-				System.out.println("Tree Type: " + tree.getClass().getName());
+				System.out.println("Tree Type: " + tree.getClass().getSimpleName());
 				System.out.println("Valid: " + tree.valid());
 				System.out.println("Height: " + tree.getHeight());
 				System.out.println("Retriving...");
 				int comp = retrieve(tree, comparisons);
-				minName = (comp < minInt) ? tree.getClass().getName() : minName;
-				System.out.println("Comparisons: " + comp);
+				minName = (comp < minInt) ? tree.getClass().getSimpleName() : minName;
+				System.out.printf("Comparisons: " + "%,d" + "\n", comp);
 				tree.resetComparisons();
 			}
 			System.out.println(dash);
-			System.out.println("Tree with minimum comparisons: " + minName);
+			System.out.println("Tree with minimum comparisons: " + minName + "\n");
 		}
 
 	}
@@ -81,7 +81,6 @@ public class A04 {
 		final char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 		double total = 0;
 		int count = 0;
-		String output = null;
 		DataCountPair<Character> dcp;
 		System.out.println("Character Table for Training File\n");
 		System.out.println("Char\tCount\tPercent\n");
@@ -92,8 +91,7 @@ public class A04 {
 		for (char c : alpha) {
 			dcp = tree.retrieve(c);
 			count = dcp.getCount();
-			output = String.format(c + "\t" + count + "\t" + "%.2f", (count / total * 100));
-			System.out.println(output);
+			System.out.printf(c + "\t" + count + "\t" + "%.2f" + "\n", (count / total * 100));
 			tree.resetComparisons();
 		}
 	}
